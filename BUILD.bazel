@@ -1,0 +1,7 @@
+proto_library(
+    name = "service_proto",
+    srcs = ["service.proto"],
+    deps = [
+        "//google/api:annotations_proto",
+    ],
+)
