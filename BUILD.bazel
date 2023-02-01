@@ -5,6 +5,7 @@ proto_library(
     srcs = ["service.proto"],
     deps = [
         "//google/api:annotations_proto",
+        "//protoc-gen-openapiv2/options:options_proto"
     ],
 )
 
