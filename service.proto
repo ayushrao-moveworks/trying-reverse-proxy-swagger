@@ -14,15 +14,18 @@ service HelloWorld {
   // Sends a greeting back to the user and accepts name as a path parameter
   rpc SayHelloToUserPathParam(HelloRequest) returns (HelloReply) {
     option (google.api.http) = {
-      get: "/v1/Tester/SayHelloToUser/{name}"
+      get : "/v1/Tester/SayHelloToUser/{name}"
     };
   }
 }
 
-message HelloRequest { 
-  string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Name that is later on returned back to the user"}];
+message HelloRequest {
+  string name = 1
+      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description : "Name that is later on returned back to the user"
+      } ];
 }
 
-message HelloReply { 
+message HelloReply {
   string message = 1; // Message that is returned back to the user
 }
