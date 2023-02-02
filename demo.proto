@@ -1,0 +1,40 @@
+/*
+   Proto schema for API Demo service
+*/
+
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+message GetDemoRequest { string param1 = 3; }
+
+message GetDemoResponse { string done = 1; }
+
+message DemoRequest { string dummy = 3; }
+
+message DemoResponse { string done = 1; }
+
+service APIDemo {
+  rpc GetDemo(GetDemoRequest) returns (GetDemoResponse) {
+    option (google.api.http) = {
+      get : "/api/v1/demo/get/{param1}"
+    };
+  }
+  rpc PutDemo(DemoRequest) returns (DemoResponse) {
+    option (google.api.http) = {
+      put : "/api/v1/demo"
+      body : "*"
+    };
+  }
+  rpc PostDemo(DemoRequest) returns (DemoResponse) {
+    option (google.api.http) = {
+      post : "/api/v1/demo"
+      body : "*"
+    };
+  }
+  rpc DeleteDemo(GetDemoRequest) returns (GetDemoResponse) {
+    option (google.api.http) = {
+      delete : "/api/v1/demo/delete/{param1}"
+    };
+  }
+}

@@ -9,6 +9,15 @@ proto_library(
     ],
 )
 
+proto_library(
+    name = "demo_proto",
+    srcs = ["demo.proto"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//protoc-gen-openapiv2/options:options_proto"
+    ],
+)
+
 protoc_gen_openapiv2(
     name = "openapiv2",
     proto = ":service_proto",
