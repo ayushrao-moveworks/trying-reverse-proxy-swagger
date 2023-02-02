@@ -1,0 +1,13 @@
+We need visibilty for fields and we need docs for method, message and field level
+
+- Documentation is being automatically generated using Bazel
+- Requires go_package to be defined
+
+- Visibility rules are working for fields (AFTER UPDATING)
+- Visibility rules also work for RPC services (AFTER UPDATING)
+- Visibility rules does not seem to work with messages. Probably because it is being used by an rpc service
+
+- Documentation that shows the different ways to include docs in the proto: https://grpc-ecosystem.github.io/grpc-gateway/docs/mapping/customizing_openapi_output/
+- Docs for messages requires the json_schema field to store docs. It also has external_docs and example fields to store additional information.
+- Docs for fields have several different available fields to generate docs. Description is what is used for documentation.
+- Docs for rpc calls have several different available fields as well. Summary is what is used for documentation. Here description is the external docs. It also has fields for things like security (depicting type of security used), etc.
