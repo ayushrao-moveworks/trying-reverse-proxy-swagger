@@ -6,6 +6,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "./;demo_rpc_service";
 
@@ -19,7 +20,19 @@ message GetDemoRequest {
   TestingMessageInside param2 = 4;
 }
 
-message DemoRequest { string dummy = 3; }
+message DemoRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema : {
+      title : "DemoRequest: This is DemoReqest which Ayush is using to test."
+      description : "This is basically a useless message though."
+      required : [ "dummy", "string_value", "double_value" ]
+    }
+  };
+  string dummy = 3
+      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description : "The dummy field."
+      } ];
+}
 
 message GetDemoResponse {
   //   option (google.api.message_visibility).restriction = "INTERNAL";
@@ -44,7 +57,11 @@ service APIDemo {
       put : "/api/v1/demo"
       body : "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation)
+        .summary = "This is an indepth summary of what the RPC does. There are "
+                   "lots of other fields also.";
   }
+
   rpc PostDemo(DemoRequest) returns (DemoResponse) {
     option (google.api.http) = {
       post : "/api/v1/demo"
