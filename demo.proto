@@ -5,17 +5,36 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
+import "google/api/visibility.proto";
 
-message GetDemoRequest { string param1 = 3; }
+option go_package = "./;demo_rpc_service";
 
-message GetDemoResponse { string done = 1; }
+message TestingMessageInside {
+  string another_message = 1;
+  int32 another_num = 2;
+}
+
+message GetDemoRequest {
+  string param1 = 3;
+  TestingMessageInside param2 = 4;
+}
 
 message DemoRequest { string dummy = 3; }
 
-message DemoResponse { string done = 1; }
+message GetDemoResponse {
+  //   option (google.api.message_visibility).restriction = "INTERNAL";
+  string done = 1;
+  int32 done_num = 2;
+}
+
+message DemoResponse {
+  string done = 1;
+  int32 done_num = 2 [ (google.api.field_visibility).restriction = "INTERNAL" ];
+}
 
 service APIDemo {
   rpc GetDemo(GetDemoRequest) returns (GetDemoResponse) {
+    option (google.api.method_visibility).restriction = "INTERNAL";
     option (google.api.http) = {
       get : "/api/v1/demo/get/{param1}"
     };
