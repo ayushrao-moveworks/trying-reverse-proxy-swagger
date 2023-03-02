@@ -3,11 +3,11 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Needed for google api and also pulls in proto_library
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "930c2c3b5ecc6c9c12615cf5ad93f1cd6e12d0aba862b572e076259970ac3a53",
-    strip_prefix = "protobuf-3.21.12",
+    sha256 = "9a301cf94a8ddcb380b901e7aac852780b826595075577bb967004050c835056",
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.21.12.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.19.6.tar.gz",
     ],
+    strip_prefix = "protobuf-3.19.6",
 )
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
@@ -35,14 +35,16 @@ http_archive(
 )
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
 gazelle_dependencies()
+
 go_repository(
     name = "in_gopkg_yaml_v2",
-    commit = "eb3733d160e74a9c7e442f435eb3bea458e1d19f",
     importpath = "gopkg.in/yaml.v2",
+    sum = "h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY=",
+    version = "v2.4.0",
 )
 
-grpc_gateway_version = "2.15.0"
-grpc_gateway_sha = "ffc9ee4484f22d82ae6566b7cc72b6e4f9ad63dc85eebb81f407d37f0f544c3e"
+grpc_gateway_version = "2.10.0"
+grpc_gateway_sha = "e9ab6d341171c616174f4a328c4315ed51f11db8ddff02ee72e10149a796e0ed"
 http_archive(
     name = "com_github_grpc_ecosystem_grpc_gateway",
     sha256 = grpc_gateway_sha,
